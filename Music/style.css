@@ -23,6 +23,14 @@ body {
   padding-top: 100%;
   position: relative;
 }
+
+img {
+    width: 70%;
+    height: auto;
+	margin: auto;
+	display: block;
+}
+
 .img{
   
   background-position: center center;
