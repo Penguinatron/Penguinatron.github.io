@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<title>Simple Wordle Solver</title>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="../style.css">
+	<base target="_parent">
+	
+	<h1 style="text-align:center;"><a href="../index.html">Oliver Hagen</a></h1>
+	
+	
+	<div class="flex-container">
+	  <div><th><button class="button button" title="I'm mainly here" type="button" onclick="window.location.href='https://www.youtube.com/channel/UC4pNafJO-zhEpPD0xOjAy7Q?view_as=subscriber';">YouTube</button></th></div>
+	  <div><th><button class="button button" title="Where my original music lives" type="button" onclick="window.location.href='https://open.spotify.com/artist/0pYNutl7B6F2DJKTtC8yZp?si=2_71L9SHQJK19K_KOOicYA';">Spotify</button></th></div>
+	  <div><th><button class="button button" title="Still learning this" type="button" onclick="window.location.href='https://oliverhagen.bandcamp.com/releases';">Bandcamp</button></th></div>
+	  <div><th><button class="button button" title="Stuff I can't or haven't uploaded to Spotify or Bandcamp" type="button" onclick="window.location.href='https://soundcloud.com/penguinator-626121505';">SoundCloud</button></th></div>
+	  <div><th><button class="button button" title="Rarely used, not fully understood" type="button" onclick="window.location.href='https://www.instagram.com/penguinatron/';">Instagram</button></th></div>
+	  <!--<div><th><button class="button button" title="Rarely used, not fully understood" type="button" onclick="window.location.href='ATA.html';">The Bad Music Scene: All The Audio Project</button></th></div>-->
+	</div>
+	
+	<h2 style="text-align:center;"><a href="MakingHome.html">Making</a></h2>
+	<h3 style="text-align:center;">Simple Wordle Solver</h3>	
+
+	
+<p style="text-align:center;">Solving Wordle in Python using set theory.</p>
+
+<img src="wordleSolver.png" title="The Wordle Solver working on the 2022-01-03 puzzle" alt="The Wordle Solver working on the 2022-01-03 puzzle"></img>
+
+<h4 style="text-align:center;">Introduction</h4>
+<p style="text-align:center;"><a href="https://www.nytimes.com/games/wordle/index.html">Wordle</a> was the big thing in early 2022, and my parents introduced it to me with the idea that I could use my recently-aquired and rudimentary knowledge of artificial intelligence programming to solve it. It seemed like a much simpler problem than that to me; given the Mastermind-style feedback a player gets with each guess, one can eliminate a hefty number of words from the pool of candidate answers each time, and should get down to a final guess fairly quickly. Plus, I was/am not very good at artificial intelligence coding.</p>
+
+<h4 style="text-align:center;">Getting the Words</h4>
+<p style="text-align:center;">First thing's first- we need a list of possible words to start off with. I acquired this fairly easily by typing 'dictionary.txt' into Google, and getting <a href="https://github.com/dwyl/english-words">this</a> helpfully provided website. In accordance with Wordle's rules, I chose the words_alpha.txt file, which omits all words containing non-alphabetic characters (i.e. numbers and symbols). In accordance with my simple knowledge of Python, I chose not to download and use the .json file, as I never learned how to use Python dictionaries. At some point, I think I shall revisit this programme and use a dictionary for data handling- should be quicker, and is definitely better practice.
+	<br><br>
+words_alpha.txt contains words of all lengths, so my programme's first step when running is to read in the file, split it into a list, and eliminate all words which aren't five characters long.</p>
+
+<h4 style="text-align:center;">Defining Functions</h4>
+<p style="text-align:center;">Wordle pretty much tells us what we need to do to our list of words, given some guess. If a letter's grey, it's not in the word- all words containing that letter can be removed from our word list. If a letter's green, it's in the word at that exact position- all words which <i>don't</i> contain that letter at that position can be removed. If a letter's orange, it's in the word, but not at that position- we can remove all words which don't contain that letter, and all words which contain that letter in that position. I implemented these rules, plus - because the word list we're working from is more extensive than Wordle's - a 'nope' function, which removes specific words if they're entered as guesses and Wordle doesn't recognise them.</p>
+
+<img src="wordleSolver/fewer.png" style="width:200px;height:auto;" title="An early version of the programme with only the ability to eliminate letters from subsequent guesses, with some humorous results." alt="An early version of the programme with only the ability to eliminate letters from subsequent guesses, with some humorous results."></img>
+
+<h4 style="text-align:center;">Interface</h4>
+<p style="text-align:center;">Simple CLI, although this one might be fun to do as a GUI at some point. Running the programme starts a while loop which spits out a guess, and the number of words left to choose from. Simply type the programme's guess into Wordle, observe the pretty colours, and feed them back into the programme by entering 'g' for green, 'o' for orange, 'e' for grey (that is, for 'eliminate') or 'nope' if Wordle doesn't recognise the word. As an example, if the programme guessed 'house' and Wordle returned <span style="background-color:lightgreen">h</span><span style="background-color:yellow">o</span><span style="background-color:grey">u</span><span style="background-color:grey">s</span><span style="background-color:lightgreen">e</span>, you'd then type 'goeeg' into the programme, press enter, and get a new guess. This is a little clunky, but does the job. A GUI could have a lookalike window showing the programme's guess, and the colours of each box could be settable via repeated clicking, with a 'guess again' button to the side once the data had been entered.</p>
+
+<h4 style="text-align:center;">Performance Analysis</h4>
+<p style="text-align:center;">I played twenty five games of Wordle Unlimited to test out the solver:<br><br><i>Warning headphone users: weird sped-up keyboard clicking sounds abound</i></p>
+
+<div style="text-align: center;"><video width=25% height=auto controls>
+  <source src="wordleSolver/demo.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></div>
+
+<p style="text-align:center;">For such a basic solution, it does pretty well. It rarely ever fails to guess the correct word, although it comes down to luck sometimes, for example in situations where there are lots of possible words that differ only by one letter. While intelligent solvers such as humans and AI programmes will guess words which are more commonly used, my programme has no word frequency weighting and is just as likely to go for an obscure word as a common one, meaning it'll just work it's way through a list of similar words, running the risk of picking the wrong one enough times to fail the game.
+<br><br>
+A further problem is the number of non-recognised guesses my solver gives. Obviously it would be silly to go through the word list text file and manually delete the obscure words- instead, the 'nope' command could remove the specified word not only from the runtime list, but also the text file itself... I'll save that for whenever I decide to add a GUI.</p>
+
+<h4 style="text-align:center;">Where to find</h4>
+<p style="text-align:center;">The latest version can be downloaded <a href="wordleSolver/SimpleWordleSolver.zip" download>here</a>.</p>
+
+<hr>
+Last updated 2023-01-03
+</body>
+</html>
+
