@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<title>Timelapse Cam</title>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="../style.css">
+	<base target="_parent">
+	
+	<h1 style="text-align:center;"><a href="../index.html">Oliver Hagen</a></h1>
+	
+	
+	<div class="flex-container">
+	  <div><th><button class="button button" title="I'm mainly here" type="button" onclick="window.location.href='https://www.youtube.com/channel/UC4pNafJO-zhEpPD0xOjAy7Q?view_as=subscriber';">YouTube</button></th></div>
+	  <div><th><button class="button button" title="Where my original music lives" type="button" onclick="window.location.href='https://open.spotify.com/artist/0pYNutl7B6F2DJKTtC8yZp?si=2_71L9SHQJK19K_KOOicYA';">Spotify</button></th></div>
+	  <div><th><button class="button button" title="Still learning this" type="button" onclick="window.location.href='https://oliverhagen.bandcamp.com/releases';">Bandcamp</button></th></div>
+	  <div><th><button class="button button" title="Stuff I can't or haven't uploaded to Spotify or Bandcamp" type="button" onclick="window.location.href='https://soundcloud.com/penguinator-626121505';">SoundCloud</button></th></div>
+	  <div><th><button class="button button" title="Rarely used, not fully understood" type="button" onclick="window.location.href='https://www.instagram.com/penguinatron/';">Instagram</button></th></div>
+	  <!--<div><th><button class="button button" title="Rarely used, not fully understood" type="button" onclick="window.location.href='ATA.html';">The Bad Music Scene: All The Audio Project</button></th></div>-->
+	</div>
+	
+	<h2 style="text-align:center;"><a href="MakingHome.html">Making</a></h2>
+	<h3 style="text-align:center;">Timelapse Cam</h3>	
+
+	
+<p style="text-align:center;">Using Python and a webcam</p>
+
+<div style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/4Dy2FIuJBJ0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+
+<h4 style="text-align:center;">Introduction</h4>
+<p style="text-align:center;">In the summer before I went to university, I heard that some student accommodation nearby to where I would be staying had been burgled. My solution was to create a surveillance camera for my room, to be set every time I left my accommodation. I hacked a basic version of this together over the summer, and quite quickly became much more interested in the movement of clouds than in the presence of potential thieves. Given this change of purpose, I eventually modified the programme to focus on timelapse photography.</p>
+
+<h4 style="text-align:center;">Features</h4>
+<p style="text-align:center;">Two helper functions show you all available video sources and let you set your preference, and a further function called 'view' acts as a viewfinder so you don't have to fire up a separate programme to position your webcam. A mostly useless function called 'split' exists to split an existing video into its frames. 
+<br><br>
+The two main functions are called 'Capture' and 'Render', and do what you'd expect. 'Capture' gives you the option of taking pictures for a certain amount of time, or taking a certain number of pictures- both options prompt for a delay time of x seconds between pictures. 'Render' asks you for a photo folder to render, an output name, a framerate, and whether you want timestamp data added or not.</p>
+
+<h4 style="text-align:center;">Implementation</h4>
+<p style="text-align:center;">The programme uses the cv2 and numpy libraries to get stuff done. I won't go through the whole code body because it's really scruffy code that makes me sad to look at (refactoring this is somewhere on the priority list, right near the bottom), but I will describe one particular problem and solution:
+	<br><br>
+time.sleep(x) is very likely to go over the time x, especially when the programme's run on a low-powered device like a Raspberry Pi. It was being used in the programme to control the delay between taking pictures. For this it was insufficient- the timings would drift off considerably, due both to the lag from running on a slower machine, and also the fact that taking pictures isn't an instantaneous operation, and adds even more lag to the process (as above, increasing on low-powered systems). The solution was to instead measure time by taking the exact time (time.time()) straight after a picture is taken, and then waiting for the difference between that time and the current time - continually checked - to be greater than or equal to the specified delay. This factors in any lag as part of the delay time, and keeps the programme running exactly to schedule.</p>
+
+<h4 style="text-align:center;">Where to find</h4>
+<p style="text-align:center;">The latest version can be downloaded <a href="timelapseCam/timelapseCam.py" download>here</a>.</p>
+
+<hr>
+Last updated 2023-01-05
+</body>
+</html>
+
