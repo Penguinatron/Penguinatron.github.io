@@ -7,10 +7,10 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="../../style.css">
 	<base target="_parent">
 	
-	<h1 style="text-align:center;"><a href="../index.html">Oliver Hagen</a></h1>
+	<h1 style="text-align:center;"><a href="../../index.html">Oliver Hagen</a></h1>
 	
 	
 	<div class="flex-container">
@@ -22,7 +22,7 @@
 	  <!--<div><th><button class="button button" title="Rarely used, not fully understood" type="button" onclick="window.location.href='ATA.html';">The Bad Music Scene: All The Audio Project</button></th></div>-->
 	</div>
 	
-	<h2 style="text-align:center;"><a href="MakingHome.html">Making</a></h2>
+	<h2 style="text-align:center;"><a href="../home.html">Making</a></h2>
 	<h3 style="text-align:center;">Timelapse Cam</h3>	
 
 	
@@ -44,10 +44,10 @@ The two main functions are called 'Capture' and 'Render', and do what you'd expe
 time.sleep(x) is very likely to go over the time x, especially when the programme's run on a low-powered device like a Raspberry Pi. It was being used in the programme to control the delay between taking pictures. For this it was insufficient- the timings would drift off considerably, due both to the lag from running on a slower machine, and also the fact that taking pictures isn't an instantaneous operation, and adds even more lag to the process (as above, increasing on low-powered systems). The solution was to instead measure time by taking the exact time (time.time()) straight after a picture is taken, and then waiting for the difference between that time and the current time - continually checked - to be greater than or equal to the specified delay. This factors in any lag as part of the delay time, and keeps the programme running exactly to schedule.</p>
 
 <h4 style="text-align:center;">Where to find</h4>
-<p style="text-align:center;">The latest version can be downloaded <a href="timelapseCam/timelapseCam.py" download>here</a>.</p>
+<p style="text-align:center;">The latest version can be downloaded <a href="timelapseCam.py" download>here</a>.</p>
 
 <hr>
-Last updated 2023-01-05
+Last updated 2023-01-06
 </body>
 </html>
 
