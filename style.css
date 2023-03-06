@@ -6,7 +6,8 @@ body {
   background-attachment: fixed;
   font-family: Helvetica, sans-serif;
   width: calc(100vw - 5vh);
-  margin-top: 2.5em;
+  
+  margin: auto;
   
   }
   table, th, td {
