@@ -5,7 +5,7 @@ body {
   background-repeat: repeat;
   background-attachment: fixed;
   font-family: Helvetica, sans-serif;
-  width: calc(100vw - 5vh);
+  width: calc(100vw - 30vh);
   
   margin: auto;
   
