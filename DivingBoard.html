@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<title>DivingBoard</title>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="style.css">
+	<base target="_parent">
+	
+	<p><a href="index.html">My main page</a></p>
+	
+	<h1 style="text-align:center;">DivingBoard</h1>
+
+<img src="DivingBoard/in situ.png" title="DivingBoard in setup with synthesiser and amplifier" alt="Mockup of DivingBoard in setup with synthesiser and amplifier"></img>
+	
+<h4 style="background-color:tomato; margin:30px; border:5px; text-align:center; color:white;">A relatively cheap and easy-to-configure Sysex-capable MIDI controller, built to combat menu-diving.</h4>
+	
+<h3>What it is:</h3>
+<p>A homemade MIDI controller aiming to solve the lack of parameter accessibility on the Roland JD-Xi synthesiser. It differs from other solutions I've seen in that <i>potential</i> ease-of-use is higher, and general use with a range of synthesisers is possible, rather than just with the JD-Xi.</p>
+
+<h3>A little more info:</h3>
+<p>
+	<ul>
+		<li>It's capable of changing parameters using both CC and Sysex MIDI messages.</li><br>
+		<li>It can be programmed without the user needing to see or understand a single MIDI message- without connecting the device to a computer.</li><br>
+		<li>Material cost can be minimised at the moment to &pound;60-&pound;70. <a id="footnote-1-ref" href="#footnote-1">[1]</a></li><br>
+		<li>It's a work in progress <a id="footnote-2-ref" href="#footnote-2">[2]</a>, currently existing as a functional prototype in regular use.</li><br>
+	</ul>
+</p>
+
+<h3>Demonstration:</h3>
+<p>Watch this space for a neat video later.</p>
+
+<h3>How to use:</h3>
+<p>This looks much worse than it is, I promise. The DivingBoard sorts different synth parameters into a three-layer-deep folder system. That sounds kind of complex and hard to navigate, but it's actually pretty straightforward:</p>
+<img src="DivingBoard/folderStructure.png" title="Not too bad...?" alt="Diagram showing the way parameters are stored in the DivingBoard"></img>
+<p>
+	<ul>
+		<li>The top-most row of knobs are rotary encoders, used for navigation. Scrolling with them moves you through the different pages of synth parameters.<br><small>(You need not use all three folder levels- they just happen to work well with the JD-Xi's internal structure. You could quite easily simplify everything by only adding new pages to a single folder- only the 'blue' knob (corresponding to 'FILTER' in the above example) would ever need moving then. I've just found that having additional layers of organisation can be helpful.)</small></li><br>
+		<li>The eight knobs surrounding the screen are potentiometers, used to adjust the parameters on the synth. The parameters they map to change depending on the page you've scrolled to.</li><br>
+		<li>The LCD makes everything clear by displaying clear labels on for each knob, as well as showing the location of the page of parameters you're currently using.</li><br>
+	</ul>
+</p>
+<p>I'll make a little video to demonstrate this in action.</p>
+<p>Also worth mentioning is the 'learn' function, which is the bit of the DivingBoard which really works well. The process is pretty simple:
+	<ul>
+		<li>Enter Learn Mode.</li><br>
+		<li>Follow the instructions on the screen.</li><br>
+		<li><small>Hope it doesn't randomly break</small></li><br>
+		<li>Upon being returned to the Main Menu, relaunch the DivingBoard software.</li><br>
+		<li>Done!</li><br>
+	</ul>
+It does sound a bit like I've glossed over some stuff there, but the instructions are genuinely straightforward to follow. I'll post a video of this process here too.</p>
+<h3>How it works:</h3>
+<p><small><i>This is a summary- I will describe how stuff works in more detail in a separate linked page.</i></small></p>
+<p>The way MIDI messages are 'learnt' by the DivingBoard is essentially a simple replay attack. My synth has an option to send all parameter alterations out as MIDI messages (either CC or Sysex, depending on the parameter). The DivingBoard can listen to these messages through a full sweep of some parameter's range, and then replay the relevant ones back to the synth when we edit the learnt parameter from the DivingBoard.</p>
+<p>The DivingBoard is powered by an Arduino Nano and a Raspberry Pi. The Arduino reads the encoder and potentiometer inputs and sends data to the Pi when a user interaction is detected. The Pi connects to the synth via USB MIDI and sends MIDI messages to it to control parameters which otherwise require heaps of menu diving to access.</p>
+<p>The Arduino code is written in Arduino programming language, and the Pi code is written in Python 3. While the Arduino code is fairly neat, the Python code needs refactoring, or possibly straight-up porting to a faster language.</p>
+<p>I've used a Raspberry Pi 3B+ as the brain of this project because it's what I have on hand. I've tried the whole setup out with a Pi Zero subbed in, and while it works, the latency is obvious. A Pi Zero 2 would probably do the job decently. </p>
+
+<h3>How to make one:</h3>
+<p>Watch this space.</p>
+
+<h3>Goals:</h3>
+<p>
+	<ul>
+		<li>An editor allowing the addition/removal/editing of all parameters stored on the DivingBoard.</li><br>
+		<li>The ability to work with multiple synthesisers without having to dive into code and edit stuff (currently hard-coded to work with the Roland JD-Xi and nothing else, but easy enough to adjust if added into a menu system for users)</li><br>
+		<li>As an extension of the above: the ability to store parameter info for multiple synthesisers, auto-detect the synth it's plugged into, and display the relevant stuff upon booting up.</li><br>
+		<li>Get rid of the random freezing.</li><br>
+		<li>Re-write the software without the utterly cursed implementation.</li><br>
+	</ul>
+</p>
+
+<hr>
+<h3>Footnotes</h3>
+<p id="footnote-1">
+   1. Arduino Nano type board at &pound;5, Raspberry Pi Zero 2 at &pound;15, eight potentiometers at &pound;12, four rotary encoders at &pound;8, 20x4 LCD at &pound;10, tupperware at &pound;10. For reference, the cheapest Sysex-capable MIDI controller I could find was about double that price (Novation Remote Zero). Figures correct as of 2024-01-10. <a href="#footnote-1-ref">&#8617;</a> 
+<p id="footnote-2">
+   2. UX needs some minor improvements (mostly idiot-proofing (not a dig at users; <i>I'm</i> the idiot)), a planned software editor for making more detailed configurations is planned but not written, and the device is occasionally a bit erratic; freezing or failing to boot properly are both rare but recurring problems.<a href="#footnote-2-ref">&#8617;</a> 
+</p>
+<p id="footnote-3">
+   3. TEXT <a href="#footnote-3-ref">&#8617;</a> 
+   <a id="footnote-3-ref" href="#footnote-3">[3]</a>
+</p>
+<hr>
+Last updated 2024-01-10
+</body>
+</html>
+
