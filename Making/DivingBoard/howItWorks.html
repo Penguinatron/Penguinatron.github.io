@@ -8,7 +8,7 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="../../style.css">
 	<base target="_parent">
 	
 	<p><a href="../DivingBoard.html#howItWorks">Back</a></p>
@@ -49,7 +49,7 @@ as built from a CSV containing the single line<br><br>
 This system is not the most efficient, I'm sure. Indeed, every time a parameter needs adjusting, several list traversals must be performed. First the nested list structure to find the current parameter being adjusted, and then the list of MIDI messages to send needs perusing until the correct one is found. When a control potentiometer is adjusted, this whole routine is performed again and again, which can't be fast. Switching to some other data structure would probably decrease latency significantly enough to allow the DivingBoard to run at acceptable speeds on a Raspberry Pi Zero.</p>
 <br>
 <p>That's pretty much how the majority of the system works, and why it's potentially decently equipped to work well with other MIDI devices too. I'm not very good at explaining stuff, and this page was written the best part of a year after I finished working on the current prototype, so some bits were initially a little muddled in my brain. Hopefully everything makes sense.</p>
-<h4><a href="../DivingBoard.html">Here's</a> a link back to the main DivingBoard page.</h4>
+<h4><a href="DivingBoard.html">Here's</a> a link back to the main DivingBoard page.</h4>
 
 <hr>
 Last updated 2024-01-23

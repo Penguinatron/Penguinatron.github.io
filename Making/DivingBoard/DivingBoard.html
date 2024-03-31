@@ -3,20 +3,21 @@
 <html lang="en-GB">
 <head>
 <title>DivingBoard</title>
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 <body>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="../../style.css">
 	<base target="_parent">
 	
-	<p><a href="home.html">My main page</a></p>
-	<p><mark>The code for this project is available at the bottom of the page.</mark></p>
+	<p><a href="../../home.html">My main page</a></p>
+	<p><mark>The code for this project is available near the bottom of the page.</mark></p>
 	
 	<h1 style="text-align:center;">DivingBoard</h1>
 
-<img src="DivingBoard/in situ.png" title="DivingBoard in setup with synthesiser and amplifier" alt="Mockup of DivingBoard in setup with synthesiser and amplifier"></img>
+<img src="in situ.png" title="DivingBoard in setup with synthesiser and amplifier" alt="Mockup of DivingBoard in setup with synthesiser and amplifier"></img>
 	
 <h4 style="background-color:tomato; margin:30px; border:5px; text-align:center; color:white;">A relatively cheap and easy-to-configure Sysex-capable MIDI controller, built to combat menu-diving.</h4>
 	
@@ -39,7 +40,7 @@
 
 <h3>How to use:</h3>
 <p>The DivingBoard sorts different synth parameters into a three-layer-deep folder system. That sounds kind of complex and hard to navigate, but it's actually pretty straightforward:</p>
-<img src="DivingBoard/folderStructure.png" title="Not too bad...?" alt="Diagram showing the way parameters are stored in the DivingBoard"></img>
+<img src="folderStructure.png" title="Not too bad...?" alt="Diagram showing the way parameters are stored in the DivingBoard"></img>
 <p>
 	<ul>
 		<li>The top-most row of knobs are rotary encoders, used for navigation. Scrolling with them moves you through the different pages of synth parameters.<br><small>(You need not use all three folder levels- they just happen to work well with the JD-Xi's internal structure. You could quite easily simplify everything by only adding new pages to a single folder- only the 'blue' knob (corresponding to 'FILTER' in the above example) would ever need moving then. I've just found that having additional layers of organisation can be helpful.)</small></li><br>
@@ -58,7 +59,7 @@
 	</ul>
 It does sound a bit like I've glossed over some stuff there, but the instructions are genuinely straightforward to follow. See the video above- skip to section 'Parameter Learning Demo'</p>
 <h3>How it works:</h3>
-<p><small><i>This is a summary- I will describe how stuff works in more detail in a <a id="howItWorks" href="DivingBoard/howItWorks.html">separate linked page</a>.</i></small></p>
+<p><small><i>This is a summary- I will describe how stuff works in more detail in a <a id="howItWorks" href="howItWorks.html">separate linked page</a>.</i></small></p>
 <p>The way MIDI messages are 'learnt' by the DivingBoard is essentially a simple replay attack. My synth has an option to send all parameter alterations out as MIDI messages (either CC or Sysex, depending on the parameter). The DivingBoard can listen to these messages through a full sweep of some parameter's range, and then replay the relevant ones back to the synth when we edit the learnt parameter from the DivingBoard.</p>
 <p>The DivingBoard is powered by an Arduino Nano and a Raspberry Pi. The Arduino reads the encoder and potentiometer inputs and sends data to the Pi when a user interaction is detected. The Pi connects to the synth via USB MIDI and sends MIDI messages to it to control parameters which otherwise require heaps of menu diving to access.</p>
 <p>The Arduino code is written in Arduino Programming Language, and the Pi code is written in Python 3. While the Arduino code is fairly neat, the Python code needs refactoring, or possibly straight-up porting to a faster language.</p>
@@ -66,6 +67,8 @@ It does sound a bit like I've glossed over some stuff there, but the instruction
 
 <h3>How to make one:</h3>
 <p>Software's available below- a construction guide will be available here later.</p>
+
+<p><i><a id="buildGuide" href="buildGuide.html">Here</a>'s the work in progress version.</i></p>
 
 <h3>Goals:</h3>
 <p>
@@ -79,7 +82,7 @@ It does sound a bit like I've glossed over some stuff there, but the instruction
 </p>
 
 <h3>Where to find</h3>
-<p>For now, the latest version of the DivingBoard software can be downloaded <a href="DivingBoard/DivingBoard v0.2.2.zip" download>here</a>. I will try and put stuff on GitHub at some point, when I can find time to re-learn how GitHub works.</p>
+<p>For now, the latest version of the DivingBoard software can be downloaded <a href="DivingBoard v0.2.2.zip" download>here</a>. I will try and put stuff on GitHub at some point, when I can find time to re-learn how GitHub works.</p>
 
 <hr>
 <h3>Footnotes</h3>
@@ -89,7 +92,7 @@ It does sound a bit like I've glossed over some stuff there, but the instruction
    2. UX needs some minor improvements (mostly idiot-proofing (not a dig at users; <i>I'm</i> the idiot)), a planned software editor for making more detailed configurations is planned but not written, and the device is occasionally a bit erratic; freezing or failing to boot properly are both rare but recurring problems.<a href="#footnote-2-ref">&#8617;</a> 
 </p>
 <hr>
-Last updated 2024-02-09
+Last updated 2024-03-22
 </body>
 </html>
 

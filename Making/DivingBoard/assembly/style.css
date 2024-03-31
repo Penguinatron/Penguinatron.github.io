@@ -1,0 +1,106 @@
+body {
+  height: 100%;
+  background: linear-gradient(0deg, rgb(243, 218, 190) 0%, linen 100%);
+  background-size:;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  font-family: Helvetica, sans-serif;
+  width: calc(100vw - 10vh);
+  
+  margin: auto;
+  
+  }
+  table, th, td {
+  border: 1px hidden black;
+  padding: 10px;
+  }
+#grid{ 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12em, 1fr));
+  grid-gap: 5vh;
+}
+#grid > a {
+  border-radius: 1vh;
+  padding-top: 100%;
+  position: relative;
+}
+
+code {
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+}
+
+img {
+    width: 60%;
+    height: auto;
+	margin: auto;
+	display: block;
+}
+
+table, th, td {
+  border: 1px dotted black;
+  border-collapse: collapse;
+}
+td{
+	width: 50%;
+}
+
+p {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.img{
+  
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.flex-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.flex-container > div {
+	margin: 15px;
+	text-align: center;
+	line-height: 15px;
+}
+
+.text {
+  position: absolute;
+  top: 1;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  font-style: normal;
+  background-color: maroon;
+  color: ivory;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  background-color: ivory; 
+  color: black; 
+  border: 2px solid maroon;
+}
+
+.button:hover {
+  background-color: maroon;
+  color: white;
+}

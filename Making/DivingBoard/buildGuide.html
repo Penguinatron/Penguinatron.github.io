@@ -1,0 +1,116 @@
+<!doctype html>
+
+<html lang="en-GB">
+<head>
+<title>Build Guide</title>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="assembly/style.css">
+	<base target="_parent">
+	
+	<p><a href="DivingBoard.html">Back</a></p>
+	
+	<h1 style="text-align:center;">DivingBoard</h1>
+	<h2 style="text-align:center; color:grey;">Build Guide</h2>
+
+<img src="hardGuts.png" title="What lurks beneath" ></img>
+
+<h2>Hardware Used</h2>
+<p>The hardware can be divided into the interior electronics, and the enclosure. The important bit would seem to be the former, but I'll cover what I used for the latter for the sake of completion.</p>
+<h3>Interior Electronics</h3>
+<p>The main brain of the DivingBoard is a <a href="https://www.raspberrypi.com/about/">Raspberry Pi</a>. I used a Pi 3B+, but others should work just fine. I'd recommend keeping costs down by going for an older Pi- anything beyond a 3 is frankly overqualified for the task, and will waste money and power. A Pi Zero 2 might work quite well, but I've not had the opportunity to test with one yet.</p>
+
+<p>The potentiometers used are 10K linear, and the encoders are the five-pin type, with three dedicated to the knob and two to a separate momentary switch. The LCD is a 4x20 HD44780 Character LCD. All can be found on Rapid Electronics, Mouser, Adafruit, etc.</p>
+
+<p>The Pi can't handle analogue inputs for pots, nor low-latency inputs for the encoders, so an <a href="https://www.arduino.cc/en/Guide/Introduction">Arduino</a> Nano (or similar) is used to read from them, and then report it's findings back to the Pi via serial over USB. Buying Arduino boards directly from the Arduino Foundation supports them, but buying cheap clones is much more economical. A Nano is ideal for this project due to it's small size, but any will do.</p>
+	
+<h3>Exterior</h3>
+<p>A tupperware container with a bunch of holes drilled and cut into it. This was done for two reasons: firstly, the plastic is durable and easy to work with. Secondly, the removable lid means that I can easily remove the front panel to access the interior electronics, if the need arises. If I had more foresight, I could have sprayed the inside surface of the tupperware silver, black or some other swish-looking colour to improve the general appearance, but that's a fairly small detail.</p>
+
+<p>The nice thing about making your own gear is that you can decide what it looks like. So long as the basic layout is the same, the case could easily be made from some lovely hardwood, or perhaps (as in my original prototype) half a cardboard box- whatever you prefer.</p>
+
+<h2>Assembly Instructions</h2>
+<p>With accompanying pictures from the assembly of the second prototype (as featured in the demo video), as the first one really was just crappy cardboard which was more a liability than a protective shell. I'll try to break everything down properly- email me via the contact details on my main page if any clarification is necessary.</p>
+
+<h3>Enclosure</h3>
+<p>
+Once you've got all your components, test out the layout in advance of starting out by 'mounting' all of the components onto cardboard. Give each knob a few centimeters of clearance so that you can easily adjust one without jogging the others. This will make positioning the components for the final version <i>much</i> simpler. 
+<br>Then:
+</p>
+
+	<table>
+	  <tr>
+	    <td>Grab a tupperware box- something roughly 300x150mm should be big enough. Try to find a decently sturdy one with a flat lid (for easier component mounting) and latches, as these are more secure than the press-fit variety of lid. </td>
+		<td>Picture</td>
+	  </tr>
+	  <tr>
+	    <td>Use a pocket knife or something similar to cut a hole about 5/8 of the way down the lid for the LCD. Get dimensions for this hole from the component datasheet you're working from.</td>
+		<td><img style="max-width:400px" src="assembly/01HolesMarked.jpg"></img></td>
+	  </tr>
+	  <tr>
+	    <td>Drill out holes for the potentiometers and encoders. Again, get dimensions from the datasheets, and follow your cardboard alignment guide for best results. <br>
+			<br> Some potentiometers will have a little peg sticking out of the front face, meant to prevent rotation of the component once installed (see image). Take note of these if you have them, and drill out holes for them- they're super useful.<br>
+			<br> Many components will have a washer and nut to fasten them in place when mounting them like this. For those that don't (such as my encoders and LCD), hot glue and a bit of improvisation do a good job. My LCD is held in place by four split pins, going through four specially-drilled holes in the lid, and then through the mounting holes in the LCD board- does the job pretty well.</td>
+		<td><img style="max-width:400px" src="assembly/02ComponentsMounted.jpg"></img></td>
+	  </tr>
+	  <tr>
+	    <td>Now, we solder. First up are the negative/ground and positive/5V power lines. For the potentiometers, the negative pin is usually the one on the right, as viewed from behind. For the encoders, check the datasheet.<br>
+			<br> As the encoders and potentiometers are all being read by the Arduino, they should all have a common ground. The exception to this is the momentary switches on the encoders, which are to be read by the Raspberry Pi. As such, they should have a separate ground wire (marked here in purple).<br>
+			<br> I am not very good at soldering, so the following pictures may cause distress amongst those with skills.</td>
+		<td><img style="max-width:400px" src="assembly/03-veLines.jpg"></img></td>
+	  </tr>
+	  <tr>
+	    <td>Same again, but for the positive potentiometer pins- usually the one on the left, as viewed from behind.<br>
+			<br> If you are in need of wire for this sort of thing and snipping the ends off of a load of jumper cables seems wasteful to you too, speaker wire seems to do a good job. I got a bunch of cheap stuff from my local hardware store. Pre colour-coded too, which is nice.</td>
+		<td><img style="max-width:400px" src="assembly/04+veLines.jpg"></td>
+	  </tr>
+	  <tr>
+	    <td>Next up are the data lines for the pots and encoders. For the pots, the middle pin is the data readout, and these connect to analogue pins on the Arduino. Colour-coding really helps here.<br>
+			<br> As my model here is a prototype, I soldered on jumper cables with one end cut off, for ease of breadboarding. For a permanent installation, you may as well solder wire directly to both the pot and the Arduino.<br>
+			<br> Each encoder has two data pins, which each connect to a digital pin on the Arduino. Make sure to get these the right way around, or they'll scroll the opposite way than you expect. Consult the datasheet and the <a href="https://www.arduino.cc/reference/en/libraries/encoder/"><code>Encoder.h</code></a> library documentation for guidance. <br>
+			<br> Consistency is key- so long as all the encoders are soldered in the same way, you can at the very worst just edit the Arduino programme to send 'negative' instead of 'positive' and vice-versa for encoders, which should straighten everything out.</td>
+		<td><img style="max-width:400px" src="assembly/05dataLines.jpg"></td>
+	  </tr>
+	  <tr>
+	    <td>For the LCD and encoder buttons, you can solder or use jumper cables and a breadboard, depending on how permanent you feel this project will end up being. My decision to use jumper cables and a breadboard was driven by this project being a prototype, and the Pi involved being my only one. If I were to re-make this now using a Pi Zero 2 or something like that, I'd solder everything to ensure solid connections.</td>
+		<td>Picture</td>
+	  </tr>
+	  
+	</table>
+
+<p>It's important to make sure that the connections made in the hardware match up with the software. It doesn't generally matter which analogue pin each potentiometer is connected to, but if they don't match up with what I've written in the software, then the alignment of control labels on the LCD will be completely different to the physical locations of those controls. To aid in the confusing task of wiring everything up, here are snippets from the my working documents and the DivingBoard code, which should help to get everything sorted:</p>
+<p>
+	<ul>
+		<li>Encoder buttons (where the number at the end of each line matches up with a pin on the Raspberry Pi, according to the <a href="https://pinout.xyz">RasPi pinout</a>):<br>
+			<pre><code>buttonA = gpiozero.Button(5)
+buttonB = gpiozero.Button(6)
+buttonC = gpiozero.Button(13)
+buttonF = gpiozero.Button(12)</code></pre></li><br>
+		<li>LCD:<br>
+			This bit's really rubbish to look at. Below is the diagram I made to help myself remember the wiring for the LCD, and below that is the code block that acquaints the Pi and the LCD:
+			<br><br>
+			<img style="max-width:500px" src="assembly/07CursedWiring.jpg"></img>
+			<br><br>
+			This image also shows the locations of the encoder momentary switches (marked A, B, C and F in red rectangles) and the completely optional LED indicators, which you can wire up if you like. I used an RGB LCD with the channels wired up to 3.3V, GPIO 2 and GPIO 3 respectively. This gives an insight into what the code is doing as you use it, which can be neat to look at. <br>
+				<br> Anywaaaay, here's that code block:<br>
+			<pre><code>lcd_rs = digitalio.DigitalInOut(board.D26)
+lcd_en = digitalio.DigitalInOut(board.D19)
+lcd_d7 = digitalio.DigitalInOut(board.D27)
+lcd_d6 = digitalio.DigitalInOut(board.D22)
+lcd_d5 = digitalio.DigitalInOut(board.D24)
+lcd_d4 = digitalio.DigitalInOut(board.D25)</code></pre></li><br>
+		<li>Done!</li><br>
+	</ul>
+</p>
+
+You've reached the end of what I've written so far. Check back soon for an updated version of this page.
+
+<h4><a href="DivingBoard.html">Here's</a> a link back to the main DivingBoard page.</h4>
+
+<hr>
+Last updated 2024-03-31
+</body>
+</html>
