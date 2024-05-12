@@ -11,12 +11,12 @@
 	<link rel="stylesheet" href="assembly/style.css">
 	<base target="_parent">
 	
-	<p><a href="DivingBoard.html">Back</a></p>
+	<p><a href="DivingBoard.html#buildGuide">Back</a></p>
 	
 	<h1 style="text-align:center;">DivingBoard</h1>
 	<h2 style="text-align:center; color:grey;">Build Guide</h2>
 
-<img src="hardGuts.png" title="What lurks beneath" ></img>
+<img src="assembly.png" title="*Quite* a long process." ></img>
 
 <h2>Hardware Used</h2>
 <p>The hardware can be divided into the interior electronics, and the enclosure. The important bit would seem to be the former, but I'll cover what I used for the latter for the sake of completion.</p>
@@ -35,7 +35,7 @@
 <h2>Assembly Instructions</h2>
 <p>With accompanying pictures from the assembly of the second prototype (as featured in the demo video), as the first one really was just crappy cardboard which was more a liability than a protective shell. I'll try to break everything down properly- email me via the contact details on my main page if any clarification is necessary.</p>
 
-<h3>Enclosure</h3>
+<h3>Enclosure and Electronics</h3>
 <p>
 Once you've got all your components, test out the layout in advance of starting out by 'mounting' all of the components onto cardboard. Give each knob a few centimeters of clearance so that you can easily adjust one without jogging the others. This will make positioning the components for the final version <i>much</i> simpler. 
 <br>Then:
@@ -43,11 +43,13 @@ Once you've got all your components, test out the layout in advance of starting 
 
 	<table>
 	  <tr>
-	    <td>Grab a tupperware box- something roughly 300x150mm should be big enough. Try to find a decently sturdy one with a flat lid (for easier component mounting) and latches, as these are more secure than the press-fit variety of lid. </td>
+	    <td>Grab a tupperware box- something roughly 300x150mm should be big enough. Try to find a decently sturdy one with a flat lid (for easier component mounting) and latches, as these are more secure than the press-fit variety of lid.<br><br>
+Use a pocket knife or something similar to cut holes in the main box part of the tupperware for cables- one USB MIDI cable, and one micro USB power cable. It can be nice to cover up the sharp edges created with electrical tape or something similar.
+</td>
 		<td>Picture</td>
 	  </tr>
 	  <tr>
-	    <td>Use a pocket knife or something similar to cut a hole about 5/8 of the way down the lid for the LCD. Get dimensions for this hole from the component datasheet you're working from.</td>
+	    <td>Cut a hole about 5/8 of the way down the lid for the LCD. Get dimensions for this hole from the component datasheet you're working from.</td>
 		<td><img style="max-width:400px" src="assembly/01HolesMarked.jpg"></img></td>
 	  </tr>
 	  <tr>
@@ -81,15 +83,15 @@ Once you've got all your components, test out the layout in advance of starting 
 	  
 	</table>
 
-<p>It's important to make sure that the connections made in the hardware match up with the software. It doesn't generally matter which analogue pin each potentiometer is connected to, but if they don't match up with what I've written in the software, then the alignment of control labels on the LCD will be completely different to the physical locations of those controls. To aid in the confusing task of wiring everything up, here are snippets from the my working documents and the DivingBoard code, which should help to get everything sorted:</p>
+<p>It's important to make sure that the connections made in the hardware match up with the software. It doesn't generally matter which analogue pin each potentiometer is connected to, but if they don't match up with what I've written in the software, then the alignment of control labels on the LCD will be completely different to the physical locations of those controls. To aid in the confusing task of wiring everything up, here are snippets from my working documents and the DivingBoard code, which should help to get everything sorted:</p>
 <p>
 	<ul>
-		<li>Encoder buttons (where the number at the end of each line matches up with a pin on the Raspberry Pi, according to the <a href="https://pinout.xyz">RasPi pinout</a>):<br>
+		<li><strong>Encoder buttons</strong> (where the number at the end of each line matches up with a pin on the Raspberry Pi, according to the <a href="https://pinout.xyz">RasPi pinout</a>):<br>
 			<pre><code>buttonA = gpiozero.Button(5)
 buttonB = gpiozero.Button(6)
 buttonC = gpiozero.Button(13)
 buttonF = gpiozero.Button(12)</code></pre></li><br>
-		<li>LCD:<br>
+		<li><strong>LCD:</strong><br>
 			This bit's really rubbish to look at. Below is the diagram I made to help myself remember the wiring for the LCD, and below that is the code block that acquaints the Pi and the LCD:
 			<br><br>
 			<img style="max-width:500px" src="assembly/07CursedWiring.jpg"></img>
@@ -102,15 +104,52 @@ lcd_d7 = digitalio.DigitalInOut(board.D27)
 lcd_d6 = digitalio.DigitalInOut(board.D22)
 lcd_d5 = digitalio.DigitalInOut(board.D24)
 lcd_d4 = digitalio.DigitalInOut(board.D25)</code></pre></li><br>
-		<li>Done!</li><br>
+		<li><strong>Rotary Potentiometers:</strong><br>
+			These are wired such that from the front, they match up with the analogue pins in ascending numerical order: A0, A1, ..., A6, A7. An image may be helpful here:
+			<br><br>
+			<img style="max-width:500px" src="assembly/08potsGuide.jpg"></img>
+			<br><br>
+		</li><br>
 	</ul>
 </p>
+<p>Once all the wiring is done, upload the <code>ControlReporter.ino</code> sketch to your Arduino, and, via the Arduino IDE's Serial Monitor, test that each control shows what you expect when manipulated. The messages you recieve back should be in the form <code>b'',x,y,\\r\\n</code>, where <code>x</code> is the address of the control, and <code>y</code> is the value of that control. If any controls seem to be sending the wrong messages, now is the time for resoldering.</p>
+<p></p>
 
-You've reached the end of what I've written so far. Check back soon for an updated version of this page.
+<h3>Software</h3>
+<p>Getting the software up and running is started by uploading the Arduino sketch as described above (if you've not done this before, check out the Arduino primers on their own website, and maybe try a few of the example projects in the Arduino IDE- it's neat stuff). Once this is done and all controls are confirmed to be working, it's Pi time.</p>
+<p>The Raspberry Pi is the central computer for the project. It's running headless (ie without a screen) in situ, but you'll need to connect peripherals in order to set it up. Basic steps are as follows (and shoot me an email or check Google if things don't make sense):</p>
+<p>
+	<ul>
+		<li>
+			Download the Raspberry Pi Imager from the Raspberry Pi Foundation website, and install standard Raspberry Pi OS with the desktop (or go CLI only if you're confident to do so). Skip out on the full version with all apps included- none of them will be used.
+		</li><br>
+		<li>
+			The installer will give you some options for installation. Keep the default username- there are some absolute filepaths which depend on this in the current version of the software. Enabling SSH is a good shout, because from there you can set up the VNC connection, which gives you wireless access to the desktop- great for debugging once the Pi is stuck in the tupperware. You'll have to put in Wifi information for a known network if you want to access that though- I'll omit further SSH instruction here because there are <i>good</i> guides out there, and I don't want to muddy the waters.
+		</li><br>
+		<li>
+			Once the Pi is alive and well, and however you're connected to it, download the DivingBoard software linked at the bottom of the main page. Unzip it so that the folder 'DivingBoard v...' is on the desktop. From there, there's a <code>README.txt</code> file which contains most of the rest of the setup instructions. You'll need to install some libraries - as before, I shan't try to explain that here when there are better guides elsewhere.
+		</li><br>
+		<li>
+			Connect stuff up: the Pi and Arduino via a USB-A port on the Pi, and the encoder buttons and LCD via the GPIO pins. Given the limited space to work with, and if you're using jumper cables and breadboards, this may be finicky.
+		</li><br>
+		<li>
+			Once the electronics are connected, and everything in the README is set up and working, connect the JD-Xi via the USB computer connection and turn it on. Go into the system setting on the synth and switch the parameter <code>Tx Edit Data</code> to ON, and <code>Sync Mode</code> to MASTER. Once this is done, then if the synth and Pi are connected and on, and no DivingBoard code is running, the synth shouldn't respond to any user input. This is weird, but likely means it's all working.
+		</li><br>
+		<li>
+			Start up the DivingBoard software either by directly launching <code>Launcher.sh</code>, or by running <code>MainMenu.py</code>. Either way, everything should come alive and start working.
+		</li><br>
+		<li>
+			The list of saved controls will obviously start out empty, so the DivingBoard won't do much. The best thing to do initially is to navigate to the main menu and then to the <code>adder.py</code> programme to start setting stuff up. From there everything should start to come together.
+		</li>
+	</ul>
+</p>
+<p>Assumptions make an ass of (mainly) me. The above instructions are fairly broad strokes covering the assembly process, and I'm sure there's plenty of room for mistakes. If any clarification is needed (and as I've mentioned above), email me with details of the problem and I'll try and sort it out.</p>
+
+<p>A few of the people who've heard about this project online have expressed interest in acquiring a DivingBoard themselves. I can't necessarily promise a full-quality product (there are too many glitches in the software at the moment for me to be completely happy with it), but if anyone was willing to pay the cost, I'd potentially be happy to put one together and send it out. I imagine for parts, labour and shipping it'd come to around £100. If the interest is there, let me know and I'll see what I can do.</p>
 
 <h4><a href="DivingBoard.html">Here's</a> a link back to the main DivingBoard page.</h4>
 
 <hr>
-Last updated 2024-03-31
+Last updated 2024-05-12
 </body>
 </html>
