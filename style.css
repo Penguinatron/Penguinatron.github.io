@@ -40,6 +40,13 @@ img {
 	display: block;
 }
 
+video {
+    width: 60%;
+    height: auto;
+	margin: auto;
+	display: block;
+}
+
 p {
 	margin-left: 20px;
 	margin-right: 20px;
