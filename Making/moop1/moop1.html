@@ -22,7 +22,7 @@
 <img src="MOOP1.png" title="MIDI Foot Manual"></img>
 
 <h4 style="text-align:center;">Introduction</h4>
-<p style="text-align:center;">A friend of mine is the guitarist in <a href="https://zendengreenpurp.com/">a prog band called Zenden Greenpurp</a>, and he had a set of old organ pedals from a home organ. He knew I'd made <a href="../divingBoard/divingBoard.html">a few MIDI projects</a> in the past, and asked if I could fit the pedals with a MIDI output for <a href="https://en.wikipedia.org/wiki/Moog_Taurus">Taurus</a>-adjacent shenanigans. I obliged because I'd been planning on making my own set at some point, and this gave me a reason to actually get going with it.</p>
+<p style="text-align:center;">A friend of mine is the guitarist in <a href="https://zendengreenpurp.com/">a prog band called Zenden Greenpurp</a>, and he had a set of old organ pedals from a home organ. He knew I'd made <a href="../DivingBoard/DivingBoard.html">a few MIDI projects</a> in the past, and asked if I could fit the pedals with a MIDI output for <a href="https://en.wikipedia.org/wiki/Moog_Taurus">Taurus</a>-adjacent shenanigans. I obliged because I'd been planning on making my own set at some point, and this gave me a reason to actually get going with it.</p>
 
 <img src="IMG_8783.jpg" title="the back"></img>
 <p style="text-align:center;">The back of the instrument, with my incredible branding skills.</p>
@@ -42,7 +42,7 @@
   <source src="IMG_8591.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video></div>
-<p style="text-align:center;">A microcontroller was the clear choice of brain for this project; quick startup, low power draw, and low latency ruled out using a full computer, for example a Raspberry Pi Zero. Further, as we have a set number of immutable inputs and outputs, there's no potential need to pop the hood, unlike the <a href="../divingBoard/divingBoard.html">DivingBoard</a> where re-programming on a whim is one of the main features. I had an Arduino Nano lying around and decided to use that.</p>
+<p style="text-align:center;">A microcontroller was the clear choice of brain for this project; quick startup, low power draw, and low latency ruled out using a full computer, for example a Raspberry Pi Zero. Further, as we have a set number of immutable inputs and outputs, there's no potential need to pop the hood, unlike the <a href="../DivingBoard/DivingBoard.html">DivingBoard</a> where re-programming on a whim is one of the main features. I had an Arduino Nano lying around and decided to use that.</p>
 <p style="text-align:center;">The first test programme can be seen above. I hooked up a single key, following the traces on the original PCB to establish the correct sockets to use. I was initially mystified to find that the reading was fluctuating wildly, regardless of which digital input pin I used on the Arduino, or which key I attached it to. This turned out to be fixable by enabling the pullup resistor on the Arduino pin; what this actually does electronically speaking, I still don't know- it sorts the problem out though.</p>
 <img src="IMG_8623.jpg" title=""></img>
 <p style="text-align:center;">Another problem became evident early on, and is visible in the above video. Without a stand, the pedals have nowhere to travel when you press down on them, rendering them unusable. A quick Wickes trip sorted this problem out, even if the result looks a little rough around the edges. I'm not really going for sleek with this one.</p>
@@ -70,7 +70,7 @@ Your browser does not support the video tag.
 <img src="IMG_8715.jpg" title=""></img>
 <p style="text-align:center;">This was made of sheet metal- 0.8mm stainless steel (or possibly aluminium- there was some confusion) to be precise. I shaped this with tin snips, pliers, a hammer and elbow grease, using only eyeballed measurements. The guide line drawn on the sheet metal in the picture above is for the front lip of the lid.</p>
 <img src="IMG_8719.jpg" title=""></img>
-<p style="text-align:center;">The process of cutting and folding the sheet metal took about half a day, which was much less than I had imagined. It was also rough as hell, but it was good enough for the intended use. The finished shape was bolted together in a few places, and wire tape was placed over all sharp edges as Wickes didn't have much in the way of metal abrasives. This metal lid is held in place at the back by friction, and at the front by three bolts (two push in, the middle one actually screws in). Amazingly this is sufficiently secure for meto lift the whole device up by the lid with no fear of anything falling apart.</p>
+<p style="text-align:center;">The process of cutting and folding the sheet metal took about half a day, which was much less than I had imagined. It was also rough as hell, but it was good enough for the intended use. The finished shape was bolted together in a few places, and wire tape was placed over all sharp edges as Wickes didn't have much in the way of metal abrasives. This metal lid is held in place at the back by friction, and at the front by three bolts (two push in, the middle one actually screws in). Amazingly this is sufficiently secure for me to lift the whole device up by the lid with no fear of anything falling apart.</p>
 <div style="text-align: center;"><video controls>
   <source src="IMG_8762.mp4" type="video/mp4">
 Your browser does not support the video tag.
@@ -101,7 +101,7 @@ Your browser does not support the video tag.
 <p style="text-align:center;">The software can be downloaded <a href="FootManual.zip" download>here</a>. I plan on making another one of these at some point, for my own use once I've given this one back to it's owner.</p>
 
 <hr>
-Last updated 2024-09-13
+Last updated 2024-09-24
 </body>
 </html>
 

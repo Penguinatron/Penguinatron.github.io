@@ -34,9 +34,11 @@ code {
 }
 
 img {
-	width: 40%;
+	/*width: 40%;
     height: 40%;
-	object-fit: contain;
+	object-fit: contain;*/
+	max-height: auto;
+	max-width: 50%;
 	margin: auto;
 	display: block;
 }
