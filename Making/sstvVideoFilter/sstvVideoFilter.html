@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<title>Timelapse Cam</title>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="../../style.css">
+	<base target="_parent">
+	
+	<h1 style="text-align:center;"><a href="../../home.html">Oliver Hagen</a></h1>
+	
+	<h2 style="text-align:center;"><a href="../home.html">Making</a></h2>
+	<h3 style="text-align:center;">SSTV Video Filter</h3>	
+
+<p style="text-align:center;">The slowest to apply video effect ever.</p>
+
+<div style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/dy9JiNNnsAw?si=B2lqF7ST-5pWMsxL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+<h4 style="text-align:center;">Introduction</h4>
+<p style="text-align:center;"><a href="https://en.wikipedia.org/wiki/Slow-scan_television">Slow-scan Television</a> is a pretty cool old technology that encodes and decodes pictures into sound, suitable for transmission over radio. The uses nowadays are probably exclusively recreational; <a href="https://en.wikipedia.org/wiki/Amateur_radio">ham radio</a> enthusiasts sometimes use it to send and recieve pictures, with notable participation from the <a href="https://www.youtube.com/watch?v=fkf_JbAzwv4">International Space Station</a>, who also seem to occasionally chat regularly with ham operators.</p>
+<p style="text-align:center;">There's a small community of people who don't send and recieve SSTV over the radio, but still think that it's neat tech- I'm among this crowd. Searching 'SSTV image' on Soundcloud or YouTube reveals a bunch of videos featuring the trademark bleeping and fizzing noises, and the <a href="https://www.reddit.com/r/SSTV/top/">r/SSTV subreddit</a> has some interesting posts. After familiarising myself with the basic use of the technology, I found amusement in intentionally distorting photos by introducing noise into the signal:</p>
+
+<div id="grid">
+	<a class="img" style="background-image: url(1.png)" title="original image"></a>
+	<a class="img" style="background-image: url(3.jpg)" title="SSTV signal routed internally via software- no noise introduced and a clean transmission"></a>
+	<a class="img" style="background-image: url(4.JPG)" title="SSTV signal sent from phone to laptop in quiet room- a small amount of noise is introduced"></a>
+	<a class="img" style="background-image: url(6.jpg)" title="SSTV signal sent from phone with volume down low, meaning a poorer signal-to-noise ratio and more visible inteference"></a>
+	<a class="img" style="background-image: url(7.jpg)" title="SSTV signal sent from phone to laptop with volume down and windows open, introducing a bunch of car noise from outside and heavily distorting the image"></a>
+</div>
+
+<p style="text-align:center;">(Pardon me digging up evidence of my old SCP phase)
+<br><br>
+The effect of transmission is clear- reduced resolution and colours impart a pleasing lo-fi look, not unlike that found on a VHS tape. Introducing additional noise messes with the image to a significant degree. The next interesting thing I found was on the aforementioned subreddit, and it was a user who <a href="https://www.reddit.com/r/SSTV/comments/m63q1y/i_made_sort_of_a_music_video_out_of_sstv_images/">processed every frame of a music video with SSTV and then stuck the whole thing back together</a> to create the exact VHS vibe described above. Here's the video they made:</p>
+
+<div style="text-align: center;"><iframe width="560" height="315" src="https://www.youtube.com/embed/ChMIFfj7k8U?si=UBINzPk48lCFf45_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+<p style="text-align:center;">The only non-awesome thing about this is that it took them an incredibly long time to do, as each frame was manually loaded up, broadcasted and recieved. My instinct straight away was to automate this so that I could run the process through without using up an entire day on it.</p>
+
+<h4 style="text-align:center;">Implementation</h4>
+<p style="text-align:center;">As per my old coding projects, it's awful. One script separates a given video file into frames. Another one uses a Python library by someone clever to convert each generated image file into an SSTV sound file, using the robot36 mode to preserve decent enough quality while keeping transmission time to under a minute. A third script plays each of these files in order, with a two-second spacer file played in between each to make sure the SSTV programme in use recognises the end of each image. The fourth concatenates all of the images generated from the signals recieved by the SSTV programme, yielding the desired VHS-like video. The second, third and fourth script each delete the masses of files created by their predecessor, leaving a fairly clean working directory.</p>
+
+<p style="text-align:center;">To stop me going crazy from the noise, I used the programme <a href="https://github.com/ExistentialAudio/BlackHole">BlackHole</a> to route the audio internally. I played a ten-hour white noise YouTube video quietly at the same time in order to add distortion to the images, and then let the programme run overnight. It took a Long Time to get any results, although this could be sped up by reducing the framerate of the input video. Still, for a three-minute video at 12fps, the process takes about 40 seconds per image transmission. This works out to about a day of waiting (180 seconds * 12fps * 40 seconds transmission time / 60 for minutes / 60 for hours), which is insane. I don't recommend this for literally anything, but it was fun to force this old technology into an application it's so ill-suited to (it is, after all, <i>Slow-scan</i> Television).</p>
+
+<h4 style="text-align:center;">Miscellany</h4>
+<p style="text-align:center;">After finding the cool SSTV music video above, I left a comment on the creator's reddit post saying that I was planning to automate the process. Another redditor did the same, and the two of us had a fun race to making it work. The other user solved the problem faster than me and more neatly- here's <a href="https://www.reddit.com/r/SSTV/comments/ma3zq6/although_uc2gqn7opitmodcpqdec_has_beaten_me_to/">my version</a>, and here's <a href="https://www.reddit.com/r/SSTV/comments/m9zrki/_/">theirs</a>. They also commented in the initial post that made us both give the idea a go, which contains some of their code.</p>
+
+<p>The only way to make this practical would be to write a decoder that doesn't need to hear the entire file out loud, but can speed-read it like the encoder library I utilised does. Some sort of white noise could be quickly added to each audio file to keep the element of static and distortion, and bring the whole thing a little closer to sanity. Maybe I'll try this, probably I won't.</p>
+
+<h4 style="text-align:center;">Where to find</h4>
+<p style="text-align:center;">The horrible collection of scripts I used can be downloaded <a href="sstvVideoFilterScripts.zip" download>here</a>, and you'll need an SSTV programme for your platform too. I use <a href="https://qsl.net/v/ve3elb/KD6CJI-MultiScan3B/">MultiScan 3B</a> for macOS.</p>
+
+<hr>
+Last updated 2024-11-02
+</body>
+</html>
+
