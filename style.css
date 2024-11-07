@@ -84,15 +84,15 @@ p {
   color: ivory;
 }
 
-.button {
+.button1 {
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  font-size: 18px;
+  margin: 3px 1px;
   transition-duration: 0.2s;
   cursor: pointer;
   background-color: ivory; 
@@ -100,7 +100,49 @@ p {
   border: 2px solid maroon;
 }
 
-.button:hover {
+.button1:hover {
   background-color: maroon;
+  color: white;
+}
+
+.button2 {
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 3px 1px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  background-color: ivory; 
+  color: rgb(43, 190, 117); 
+  border: 2px solid rgb(43, 190, 117);
+}
+
+.button2:hover {
+  background-color: rgb(43, 190, 117);
+  color: white;
+}
+
+.button3 {
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 3px 1px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  background-color: ivory; 
+  color: rgb(40, 160, 193); 
+  border: 2px solid rgb(40, 160, 193);
+}
+
+.button3:hover {
+  background-color: rgb(40, 160, 193);
   color: white;
 }
