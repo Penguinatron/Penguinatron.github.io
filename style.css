@@ -146,3 +146,24 @@ p {
   background-color: rgb(40, 160, 193);
   color: white;
 }
+
+.button4 {
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 3px 1px;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  background-color: ivory; 
+  color: rgb(246, 135, 35); 
+  border: 2px solid rgb(246, 135, 35);
+}
+
+.button4:hover {
+  background-color: rgb(246, 135, 35);
+  color: white;
+}
