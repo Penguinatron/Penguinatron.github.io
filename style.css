@@ -167,3 +167,27 @@ p {
   background-color: rgb(246, 135, 35);
   color: white;
 }
+
+.collapsible {
+  background-color: maroon;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: white;
+  color: maroon;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
