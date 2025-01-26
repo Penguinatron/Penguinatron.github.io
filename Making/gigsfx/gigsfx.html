@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<title>SFX Trigger System</title>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="../../style.css">
+	<base target="_parent">
+
+	<h1 style="text-align:center;"><a href="../../home.html">Oliver Hagen</a></h1>
+	<h2 style="text-align:center;"><a href="../home.html">Making</a></h2>
+
+<h3 style="text-align:center;">SFX Trigger System</h3>
+
+<h4 style="background-color:tomato; margin:30px; border:5px; text-align:center; color:white;"><a id="build-log-ref" href="#build-log">Build Log</a></h4>
+
+<h4 style="text-align:center;">Introduction</h4>
+<p style="text-align:center;">I was asked in December of 2024 if I could play keys and provide SFX for a Pink Floyd tribute set, running through all of <i>Dark Side of the Moon</i>, plus selections from <i>The Wall</i>, some kooky early stuff, some okay later stuff, and some other favourites. Pink Floyd tend to feature sound effects heavily in their songs, and I wanted a reliable and easy to operate method for playing them exactly when needed.</p>
+
+<p style="text-align:center;">In 2022, I played piano and triggered sound effects for a stage show, <a href="../../Music/Splinters/Splinters.html"><i>Splinters</i></a>. For this, I took what I'd learned from my EPQ project (yet to be written up on this website) and wrote a program to trigger off sound effects via keypresses. I then placed a USB QWERTY keyboard by my feet, hooked my laptop up to my keyboard speakers for maximum volume, and hid the whole thing behind the keyboard stand, operating the QWERTY keyboard with my feet to avoid drawing attention.</p>
+
+<p style="text-align:center;">The system was effective, although it had drawbacks in the input method- QWERTY keyboards aren't built to withstand feet, and I had to be careful to avoid damaging the thing. Further, the script was hard-coded to only play specific sounds- good for one show, but not very versatile. The aim with this project was to overcome those hurdles and take the design from proof-of-concept to usable and reliable stage tool.</p>
+
+<h3 style="text-align:center;" id="build-log">Build Log</h3>
+
+<p style="text-align:center;"><i>The following was written as I did it and isn't all proof-read.</i></p>
+
+<h4>2025-01-18</h4>
+<p style="text-align:center;">The design idea is as follows:
+	<li>Sounds will be sorted in a gig/song/sound hierarchy, for easy comprehension by the user when adding or moving sounds around.</li>
+	<li>The naming scheme for songs and sounds will be 'XX name.filetype', where XX is a two-digit number (I don't anticipate any song having more than 99 sounds, or any gig having more than 99 songs).</li>
+	<li>After choosing a gig using the computer keyboard, the user controls will be previous/next song, previous/next sound, and play/stop.</li>
+	<li>Sounds will restart from the beginning if stopped.</li>
+	<li>If a sound is playing and the 'next sound' button is pressed, the next sound will begin playing. If nothing's playing, then the next sound will not auto-play.</li>
+	<li>A volume knob should be available to fade sounds up and down; foot-operated if possible.</li>
+	<li>The GUI should display the chosen gig, the current song, current sound and next sound, and be ledgible from a metre or two so that I can see it when the laptop's down by my feet.</li>
+	<li>The input device should be built to withstand use as a foot-pedal device.</li>
+</p>
+
+<p style="text-align:center;">This brief presents several challenges- the hardest bit for me will be GUI programming, as I have no experience in the area. All other problems at least have a clear starting point.</p>
+
+<h4>2025-01-19</h4>
+<p style="text-align:center;">I started by sorting the sound organisation. A simple folder structure of gig/song/sound can be traversed using Python's <code>os</code> library, and with some helper fuctions to sanitise data and order files numerically, we're in business.</p>
+
+<div style="text-align: center;"><video controls>
+  <source src="01hierarchy.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></div>
+
+<p style="text-align:center;">The UI here is pretty hard to read at a glance, but it's temporary until a GUI is in place. Also, the program's not responding to keypresses here, but rather standard <code>input</code> statements. All current songs are stored in a list, as are all current sounds- the latter list is renewed whenever a user switches songs. Simple rubberbanding is implemented to stop users from navigating beyond the bounds of the lists. Sound isn't being considered here at all yet- it's been a while since I've dealt with audio in Python, so I'm starting from the basics again to make sure I know what I'm doing.</p>
+
+<h4>2025-01-20</h4>
+<p style="text-align:center;">To handle keypresses, I am using the Python game-making library <a href="https://pyglet.readthedocs.io/en/latest/index.html"><code>Pyglet</code></a>. This is the same library I used for the original Splinters Soundbox, and so it's easy enough to get going with it again. Once the proof of concept is finished, I may investigate other libraries to see if I can find something more lightweight. For now, due to it's ability to both play audio and handle keypresses, <code>Pyglet</code> remains.</p>
+
+<div style="text-align: center;"><video controls>
+  <source src="02buttons.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video></div>
+
+<p style="text-align:center;">As the demo video shows, the initial choice of gig must be done by the user using the full QWERTY keyboard and standard Python <code>input()</code> statements. Once the gig is chosen, it loads up the sounds and navigation transfers over to the <code>Pyglet</code> system. This uses the keys 1-5 for navigation, and these keys will later be linked to footswitches to ensure a hardwearing design.
+	<br><br>
+Next up, playing sound.</p>
+
+<hr>
+Last updated 2025-01-20
+</body>
+</html>
+
