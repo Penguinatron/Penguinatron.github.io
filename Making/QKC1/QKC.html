@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<title>QKC1</title>
+</head>
+<body>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" href="../../style.css">
+	<base target="_parent">
+
+	<h1 style="text-align:center;"><a href="../../home.html">Oliver Hagen</a></h1>
+	<h2 style="text-align:center;"><a href="../home.html">Making</a></h2>
+
+<h3 style="text-align:center;">QKC1: QWERTY Keyboard Controller - Pronounced 'cuh cuh cuh one'</h3>
+
+<img src="MISC1.png" title="MISC1"></img>
+
+<h3 style="text-align:center;">Problem</h3>
+<p style="text-align:center;">I'm playing a Pink Floyd cover gig in November which requires me to handle all keys parts and all sound effects. <a href="../misc1/MISC1.html">I've already made a foot controller for when more notes are needed but my hands are both busy</a>, and now I need a quick way to trigger SFX without taking my hands off of the keyboard. I also have some left over material lying around from the construction of the aforementioned MISC1, which would be good to use up.</p>
+
+<h3 style="text-align:center;">Solution</h3>
+<p style="text-align:center;">I actually solved this problem once before, when <a href="../../Music/Splinters/Splinters.html">my work writing and playing original music for a youth theatre production</a> required me to play piano and make sound effects at the same time. What's more, the solution I used then was itself a continuation of earlier work done on my EPQ (a 'smart' boombox), which I've yet to write up whatsoever.</p>
+<p style="text-align:center;">The solution to the EPQ, the Splinters SFX, and the Pink Floyd show all centre around the Python library <a href="https://pyglet.readthedocs.io/en/latest/">Pyglet</a>, which is intended for game development purposes. It is primarily useful to me for it's capacity to respond in real-time to keyboard input, and to play sounds.</p>
+<p style="text-align:center;">The Splinters soundbox was a QWERTY keyboard with LEGO bricks attached to specific keys to elevate them so that I could press each one individually with my foot. Then I wrote a simple program that linked each key to an audio file loaded as a pre-buffered sound source (important for <i>instant</i> playback with no decoding latency), and started it at the beginning of each show. This worked quite well for <i>Splinters</i>, but needed development as the setup wouldn't scale well if many more sounds were required, and I felt like I was going to break the keyboard even with the lightest of footpresses.</p>
+<p style="text-align:center;">The answer was building some dedicated hardware, and then writing a new programme which could scale to play any number of audio samples without too much added complexity.</p>
+
+<h3 style="text-align:center;">Hardware</h3>
+<p style="text-align:center;">I bought a QWERTY keyboard and took it apart, removing the plastic layers containing the key traces and getting to the controller itself. Keys in a QWERTY keyboard are generally mapped out like a table, with grid references for each key (a byproduct of this is that certain keys can't be pressed in combination with each other). </p>
+	
+<h3 style="text-align:center;">Solution</h3>
+<p style="text-align:center;"></p>
+
+<h3 style="text-align:center;">Solution</h3>
+<p style="text-align:center;"></p>
+	
+<hr>
+Last updated 2025-10-18
+</body>
+</html>
+
