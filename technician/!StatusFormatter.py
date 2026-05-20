@@ -1,6 +1,9 @@
 import datetime
 
+#converts a 'CSV' (with pipes (|) instead of commas(,)) into an HMTL document
 
+
+print("defining pre-written sections")
 notes = """This site is new- feel free to report any obvious errors via the contact link below"""
 
 openingSection = """<!doctype html>
@@ -62,18 +65,22 @@ lime for nearly done
 </html>
 """
 
+print("reading from CSV file")
+
 file = open("currentRepairs.csv","r")
 data = file.readlines()
-workshopStatus = str("""<h2>"""+data[0].split(",")[0]+"""</h2>""")
+
+print("extracting data")
+workshopStatus = str("""<h2>"""+data[0].split("|")[0]+"""</h2>""")
 
 tableLines = []
 
 for currentLine in range(2,len(data)):
-    RepairReference = str("<td>"+data[currentLine].split(",")[0]+"</td>")
-    LastUpdated = str("<td>,"+data[currentLine].split(",")[1]+",</td>")
-    RepairBrief = str("<td>"+data[currentLine].split(",")[2]+"</td>")
+    RepairReference = str("<td>"+data[currentLine].split("|")[0]+"</td>")
+    LastUpdated = str("<td>|"+data[currentLine].split("|")[1]+"|</td>")
+    RepairBrief = str("<td>"+data[currentLine].split("|")[2]+"</td>")
     colour = "LightSkyBlue"
-    Status = data[currentLine].split(",")[4].replace("\n","")
+    Status = data[currentLine].split("|")[4].replace("\n","")
     if Status == "wip":
         colour = "gold"
     if Status == "delayed":
@@ -82,24 +89,26 @@ for currentLine in range(2,len(data)):
         colour = "lime"
     #else:
     #    colour = "LightSkyBlue"
-    Progress = str("""<td style="background-color:"""+colour+"""">"""+data[currentLine].split(",")[3]+"</td>")
+    Progress = str("""<td style="background-color:"""+colour+"""">"""+data[currentLine].split("|")[3]+"</td>")
     tableLines.append(str("<tr>"+RepairReference+LastUpdated+RepairBrief+Progress+"</tr>"))
 
 n = len(tableLines)
 for i in range(n-1):
   for j in range(n-i-1):
-    if int(tableLines[j].split(",")[1].replace("-","")) < int(tableLines[j+1].split(",")[1].replace("-","")):
+    if int(tableLines[j].split("|")[1].replace("-","")) < int(tableLines[j+1].split("|")[1].replace("-","")):
       tableLines[j+1], tableLines[j] = tableLines[j], tableLines[j+1]
 
 file = open("workshopStatus.html","w")
+print("writing to HTML document")
 file.write(openingSection)
 file.write(workshopStatus)
 file.write(tableStart)
 for count in range(0,len(tableLines)):
-    file.write(str(tableLines[count].replace(",","")))
+    file.write(str(tableLines[count].replace("|","")))
 file.write("</table>")
 file.write(str("<br><p>Last Updated "+str(datetime.datetime.now()))+"</p>")
 file.write(str("""<p style="color:red"><b>"""+notes+"""</b></p>"""))
 file.write(closingSection)
 
 file.close()
+print("done!")
