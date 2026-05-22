@@ -4,7 +4,7 @@ import datetime
 
 
 print("defining pre-written sections")
-notes = """This site is new- feel free to report any obvious errors via the contact link below"""
+notes = """This site is new- feel free to report any obvious errors via the contact links below"""
 
 openingSection = """<!doctype html>
 <html lang="en-GB">
