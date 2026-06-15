@@ -31,7 +31,7 @@ tableStart = """
 
 	<table style="text-align:left; border-spacing:10px">
 	  <tr>
-		<th>Repair Reference</th>
+		<th>Workshop Job Number</th>
 		<th>Last Updated</th>
 	    <th>Repair Brief</th>
 		<th>Status</th>
@@ -42,10 +42,10 @@ closingSection = """
 
 <h2>About:</h2>
 <p>This quick, simple website shows all repairs currently in progress in the workshop, along with their status. This is updated at the end of each working day, so check back for progress.</p>
-<p>If you don't see your Repair Reference Number in the list above, it's either not yet had work started, or has been completed and is awaiting collection. If you are unsure, feel free to get in touch via the details given below.</p>
+<p>If you don't see your Workshop Job Number in the list above, it's either not yet had work started, or has been completed and is awaiting collection. If you are unsure, feel free to get in touch via the details given below.</p>
 
 <h2>Contact Us:</h2>
-<p>Questions about the status of your instrument, or the repair services available? See below, and be sure to quote your Repair Reference Number for a quicker response.</p>
+<p>Questions about the status of your instrument, or the repair services available? See below, and be sure to quote your Workshop Job Number for a quicker response.</p>
 
 <h3>If your repair is via Hickies Music Shop:</h3>
 <p>Give the shop a ring on <b>01189 575 771</b>, or <a href="mailto:admin@hickies.co.uk"><b>send an email</b></a>; someone will take a message and I'll get back to you ASAP. I usually work in the shop on all weekdays aside from Wednesdays.</p>
