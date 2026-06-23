@@ -2,6 +2,22 @@ import datetime
 
 #converts a 'CSV' (with pipes (|) instead of commas(,)) into an HMTL document
 
+print("defining functions")
+def intVersion(b):
+    toInt = []
+    toIntStr = ""
+    a = str(b)
+    for count in range(0,len(a)):
+        try:
+            int(a[count])
+        except:
+            pass
+        else:
+            toInt.append(a[count])
+            
+    for count in range(0,len(toInt)):
+        toIntStr = toIntStr+toInt[count]
+    return int(toIntStr)
 
 print("defining pre-written sections")
 notes = """This site is new- feel free to report any obvious errors via the contact links below"""
@@ -91,6 +107,13 @@ for currentLine in range(2,len(data)):
     #    colour = "LightSkyBlue"
     Progress = str("""<td style="background-color:"""+colour+"""">"""+data[currentLine].split("|")[3]+"</td>")
     tableLines.append(str("<tr>"+RepairReference+LastUpdated+RepairBrief+Progress+"</tr>"))
+
+
+n = len(tableLines)
+for i in range(n-1):
+  for j in range(n-i-1):
+    if intVersion(tableLines[j].split("|")[0]) < intVersion(tableLines[j+1].split("|")[0]):
+      tableLines[j+1], tableLines[j] = tableLines[j], tableLines[j+1]
 
 n = len(tableLines)
 for i in range(n-1):
