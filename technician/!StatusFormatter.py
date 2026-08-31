@@ -20,7 +20,8 @@ def intVersion(b):
     return int(toIntStr)
 
 print("defining pre-written sections")
-notes = """This site is new- feel free to report any obvious errors via the contact links below"""
+#notes = """This site is new- feel free to report any obvious errors via the contact links below"""
+notes=''
 
 openingSection = """<!doctype html>
 <html lang="en-GB">
@@ -92,21 +93,22 @@ workshopStatus = str("""<h2>"""+data[0].split("|")[0]+"""</h2>""")
 tableLines = []
 
 for currentLine in range(2,len(data)):
-    RepairReference = str("<td>"+data[currentLine].split("|")[0]+"</td>")
-    LastUpdated = str("<td>|"+data[currentLine].split("|")[1]+"|</td>")
-    RepairBrief = str("<td>"+data[currentLine].split("|")[2]+"</td>")
-    colour = "LightSkyBlue"
-    Status = data[currentLine].split("|")[4].replace("\n","")
-    if Status == "wip":
-        colour = "gold"
-    if Status == "delayed":
-        colour = "tomato"
-    if Status == "done":
-        colour = "lime"
-    #else:
-    #    colour = "LightSkyBlue"
-    Progress = str("""<td style="background-color:"""+colour+"""">"""+data[currentLine].split("|")[3]+"</td>")
-    tableLines.append(str("<tr>"+RepairReference+LastUpdated+RepairBrief+Progress+"</tr>"))
+    if data[currentLine] != "||||\n" and data[currentLine] != "||||":
+        RepairReference = str("<td>"+data[currentLine].split("|")[0]+"</td>")
+        LastUpdated = str("<td>|"+data[currentLine].split("|")[1]+"|</td>")
+        RepairBrief = str("<td>"+data[currentLine].split("|")[2]+"</td>")
+        colour = "LightSkyBlue"
+        Status = data[currentLine].split("|")[4].replace("\n","")
+        if Status == "wip":
+            colour = "gold"
+        if Status == "delayed":
+            colour = "tomato"
+        if Status == "done":
+            colour = "lime"
+        #else:
+        #    colour = "LightSkyBlue"
+        Progress = str("""<td style="background-color:"""+colour+"""">"""+data[currentLine].split("|")[3]+"</td>")
+        tableLines.append(str("<tr>"+RepairReference+LastUpdated+RepairBrief+Progress+"</tr>"))
 
 
 n = len(tableLines)
