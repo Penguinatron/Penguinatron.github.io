@@ -26,7 +26,7 @@ notes=''
 openingSection = """<!doctype html>
 <html lang="en-GB">
 <head>
-<title>Hickies Workshop Status</title>
+<title>Oliver Hagen Instrument Workshop Status</title>
 
 <link rel="stylesheet" href="style.css">
 <base target="_parent">
@@ -48,7 +48,7 @@ tableStart = """
 
 	<table style="text-align:left; border-spacing:10px">
 	  <tr>
-		<th>Workshop Job Number</th>
+		<th>Job Number</th>
 		<th>Last Updated</th>
 	    <th>Repair Brief</th>
 		<th>Status</th>
@@ -64,8 +64,6 @@ closingSection = """
 <h2>Contact Us:</h2>
 <p>Questions about the status of your instrument, or the repair services available? See below, and be sure to quote your Workshop Job Number for a quicker response.</p>
 
-<h3>If your repair is via Hickies Music Shop:</h3>
-<p>Give the shop a ring on <b>01189 575 771</b>, or <a href="mailto:admin@hickies.co.uk"><b>send an email</b></a>; someone will take a message and I'll get back to you ASAP. I usually work in the shop on all weekdays aside from Wednesdays.</p>
 <h3>If your repair is via me directly:</h3>
 <p><a href="mailto:ophagen@icloud.com"><b>Send me an email</b></a> and I'll get back to you as quickly as possible.</p>
 
