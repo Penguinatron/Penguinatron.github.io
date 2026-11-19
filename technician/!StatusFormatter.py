@@ -61,7 +61,7 @@ closingSection = """
 <p>This quick, simple website shows all repairs currently in progress in the workshop, along with their status. This is updated at the end of each working day, so check back for progress.</p>
 <p>If you don't see your Workshop Job Number in the list above, it's either not yet had work started, or has been completed and is awaiting collection. If you are unsure, feel free to get in touch via the details given below.</p>
 
-<h2>Contact Us:</h2>
+<h2>Contact:</h2>
 <p>Questions about the status of your instrument, or the repair services available? See below, and be sure to quote your Workshop Job Number for a quicker response.</p>
 
 <h3>If your repair is via me directly:</h3>
